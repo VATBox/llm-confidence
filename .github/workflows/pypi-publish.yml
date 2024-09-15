@@ -35,16 +35,29 @@ jobs:
       # Automatically bump the patch version
       - name: Bump version and commit
         run: |
-          bump2version patch  # You can also use 'minor' or 'major' as needed
+          bump2version patch  # Or 'minor' or 'major' if necessary
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Push the changes back to the repository
-      - name: Push changes
+      # Push the changes to a new branch
+      - name: Push to branch
         run: |
-          git push --follow-tags
+          git checkout -b bump-version-${{ github.sha }}
+          git push origin bump-version-${{ github.sha }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Create a pull request
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: bump-version-${{ github.sha }}
+          commit-message: "Bump version to ${{ steps.bump2version.outputs.new_version }}"
+          title: "Version Bump: ${{ steps.bump2version.outputs.new_version }}"
+          body: "This PR bumps the version to ${{ steps.bump2version.outputs.new_version }}."
+          base: master
+          branch-name: bump-version-${{ github.sha }}
 
       # Build the package
       - name: Build the package
