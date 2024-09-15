@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name='llm-confidence',  # Replace with your desired package name
-    version='0.2.2',
+    version='0.2.3',
     author='Ruth Miller',  # Replace with your name or organization
     author_email='ruth.miller@bluedotcorp.com',  # Replace with your email
     description='A Python package for extracting confidence scores from LLM models outputs, particularly using log probabilities',
