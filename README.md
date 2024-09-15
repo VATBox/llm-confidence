@@ -32,7 +32,7 @@ logprobs_handler = LogprobsHandler()
 
 def get_completion(
         messages: list[dict[str, str]],
-        model: str = "gpt-4",
+        model: str = "gpt-4o",
         max_tokens=500,
         temperature=0,
         stop=None,
@@ -66,6 +66,9 @@ response_raw = get_completion(
     logprobs=True,
     response_format={'type': 'json_object'}
 )
+
+# Print the output
+print(response_raw.choices[0].message.content)
 
 # Extract the log probabilities from the response
 response_logprobs = response_raw.choices[0].logprobs.content if hasattr(response_raw.choices[0], 'logprobs') else []
