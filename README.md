@@ -1,21 +1,21 @@
-# llm-confidence
-A Python package for extracting confidence scores from large language model (LLM) outputs, particularly using log probabilities.
+Explanation:
+Get Completion: Sends a prompt to the OpenAI GPT model and retrieves the completion, including the log probabilities.
+Logprobs Formatting: Formats the raw log probabilities into a structured format that can be processed.
+Confidence Calculation: Aggregates the probabilities and returns confidence scores for key-value pairs in the model’s JSON response.
+Customizing Nested Keys for Confidence Aggregation
+In the example above, the nested keys dictionary (nested_keys_dct) allows you to define custom fields (like 'vat') and related sub-keys (e.g., 'vat_data', 'percent', etc.) to calculate an aggregated confidence score.
 
-Features:
-Extracts token-level log probabilities.
-Aggregates probabilities to calculate confidence scores for key-value pairs in structured responses.
-Provides an easy-to-use API for processing log probabilities from OpenAI models.
-Installation
-You can install llm-confidence from PyPI (once it's published):
+You can modify this to fit your use case by adding more nested keys based on the structure of your LLM outputs.
 
-bash
-Copy code
-pip install llm-confidence
-Usage Example
-Here’s an example of how to use the llm-confidence package to extract and process confidence scores from an OpenAI GPT model output:
+License
+This package is licensed under the Apache License 2.0. See the LICENSE file for more details.
 
-python
-Copy code
+Contributing
+Feel free to fork the repository, create new branches, and open PRs to contribute to the project. Ensure that new features or fixes come with adequate tests.
+
+Usage
+Here’s an example of how to use the llm-confidence package to calculate confidence scores based on log probabilities from OpenAI GPT models:
+
 from openai import OpenAI
 import os
 from llm_confidence.logprobs_handler import LogprobsHandler
@@ -75,17 +75,39 @@ confidence = logprobs_handler.process_logprobs(
 # Print the confidence scores
 print(confidence)
 
-Explanation:
-Get Completion: Sends a prompt to the OpenAI GPT model and retrieves the completion, including the log probabilities.
+Example Breakdown
+Get Completion: Sends a prompt to the OpenAI GPT model and retrieves the completion, including log probabilities.
 Logprobs Formatting: Formats the raw log probabilities into a structured format that can be processed.
-Confidence Calculation: Aggregates the probabilities and returns confidence scores for key-value pairs in the model’s JSON response.
-Customizing Nested Keys for Confidence Aggregation
-In the example above, the nested keys dictionary (nested_keys_dct) allows you to define custom fields (like 'vat') and related sub-keys (e.g., 'vat_data', 'percent', etc.) to calculate an aggregated confidence score.
+Confidence Calculation: Aggregates the probabilities and returns confidence scores for key-value pairs in the model's JSON response.
+Customization
+You can customize the nested_keys_dct parameter to aggregate confidence scores for your specific fields. For example:
 
-You can modify this to fit your use case by adding more nested keys based on the structure of your LLM outputs.
+nested_keys_dct={'address': ['street', 'city', 'state']}
+
+This will compute a combined confidence score for all fields related to addresses.
 
 License
-This package is licensed under the Apache License 2.0. See the LICENSE file for more details.
+This project is licensed under the Apache License 2.0 - see the LICENSE file for details.
 
 Contributing
-Feel free to fork the repository, create new branches, and open PRs to contribute to the project. Ensure that new features or fixes come with adequate tests.
+We welcome contributions! Here's how you can help:
+
+Fork the project.
+Create a branch for your feature or bug fix.
+Open a pull request.
+Make sure to include tests for any new features or bug fixes.
+
+Feel free to use the package and improve upon it. If you encounter any issues, please open an issue in the repository.
+
+
+### Key Sections:
+- **Title & Description**: Provides a quick overview of what the package does.
+- **Installation**: Simple command to install the package via `pip`.
+- **Usage**: Includes a working example with code that shows how to use the package.
+- **Customization**: A brief section explaining how users can modify the `nested_keys_dct` parameter.
+- **License**: License details for the project.
+- **Contributing**: A call for contributions with basic steps.
+
+You can save this content as `README.md` in the root of your repository.
+
+Let me know if you'd like any additional modifications!
