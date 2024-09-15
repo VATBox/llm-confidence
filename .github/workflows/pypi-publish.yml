@@ -26,6 +26,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install setuptools wheel twine
 
+      # Automatically bump the version (e.g., patch)
+      - name: Bump version and commit
+        run: |
+          bump2version minor  # You can replace 'patch' with 'minor' or 'major' as needed
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Required for committing back to the repository
+
       # Build the package
       - name: Build the package
         run: |
