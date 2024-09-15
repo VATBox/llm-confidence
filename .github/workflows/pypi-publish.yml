@@ -35,7 +35,7 @@ jobs:
       # Automatically bump the version (e.g., patch, minor, major)
       - name: Bump version and commit
         run: |
-          bump2version patch  # Replace 'patch' with 'minor' or 'major' as needed
+          bump2version minor  # Replace 'patch' with 'minor' or 'major' as needed
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Required for committing back to the repository
 
