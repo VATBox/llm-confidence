@@ -1,1 +1,1 @@
-from .llm_confidence import LogprobsHandler
+from .logprobs_handler import LogprobsHandler
