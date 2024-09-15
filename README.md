@@ -74,3 +74,18 @@ confidence = logprobs_handler.process_logprobs(
 
 # Print the confidence scores
 print(confidence)
+
+Explanation:
+Get Completion: Sends a prompt to the OpenAI GPT model and retrieves the completion, including the log probabilities.
+Logprobs Formatting: Formats the raw log probabilities into a structured format that can be processed.
+Confidence Calculation: Aggregates the probabilities and returns confidence scores for key-value pairs in the model’s JSON response.
+Customizing Nested Keys for Confidence Aggregation
+In the example above, the nested keys dictionary (nested_keys_dct) allows you to define custom fields (like 'vat') and related sub-keys (e.g., 'vat_data', 'percent', etc.) to calculate an aggregated confidence score.
+
+You can modify this to fit your use case by adding more nested keys based on the structure of your LLM outputs.
+
+License
+This package is licensed under the Apache License 2.0. See the LICENSE file for more details.
+
+Contributing
+Feel free to fork the repository, create new branches, and open PRs to contribute to the project. Ensure that new features or fixes come with adequate tests.
