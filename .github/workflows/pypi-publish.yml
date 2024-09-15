@@ -32,12 +32,19 @@ jobs:
           git config --local user.email "github-actions@github.com"
           git config --local user.name "GitHub Actions"
 
-      # Automatically bump the version (e.g., patch, minor, major)
+      # Automatically bump the patch version
       - name: Bump version and commit
         run: |
-          bump2version patch  # Replace 'patch' with 'minor' or 'major' as needed
+          bump2version patch  # You can also use 'minor' or 'major' as needed
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Required for committing back to the repository
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Push the changes back to the repository
+      - name: Push changes
+        run: |
+          git push --follow-tags
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Build the package
       - name: Build the package
